@@ -1,1 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The RC Reserve • thercreserve.com</title>
+  <meta name="description" content="The RC Reserve — your pit lane for RC cars, trucks, drones, and boats. Kits, RTRs, parts, tools, and pro tips." />
+  <meta property="og:title" content="The RC Reserve" />
+  <meta property="og:description" content="Your pit lane for RC cars, trucks, drones, and boats." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://thercreserve.com" />
+  <meta name="theme-color" content="#6A4DFF" />
+  <style>
+    :root{
+      --bg-0:#0b0b12;          /* page background */
+      --bg-1:#11111a;          /* surfaces */
+      --bg-2:#161626;          /* cards */
+      --txt:#e7e8ee;           /* primary text */
+      --muted:#a5a7b9;         /* secondary text */
+      --primary:#7c4dff;       /* brand purple */
+      --accent:#00e5ff;        /* neon cyan */
+      --ok:#2bd978;            /* success */
+      --warn:#ffd166;          /* warning */
+      --radius:18px;
+      --ring:0 0 0 2px color-mix(in oklab, var(--accent) 40%, transparent);
+      --shadow:0 10px 30px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.04);
+      --glass:rgba(255,255,255,.06);
+      --glass-strong:rgba(255,255,255,.1);
+      --grid:clamp(240px, 45%, 420px);
+      --speed:.35s;
+    }
 
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--txt); background: radial-gradient(1200px 800px at 80% -10%, #1b1640 0%, #0f0f19 45%, var(--bg-0) 80%), linear-gradient(180deg, #0f0f19, var(--bg-0));
+      letter-spacing:.2px;
+    }
+
+    /* --- Utils --- */
+    .container{width:min(1200px, 92vw); margin-inline:auto}
+    .row{display:flex; gap:20px; align-items:center}
+    .btn{
+      appearance:none; border:0; padding:14px 20px; border-radius:999px; cursor:pointer; font-weight:700; letter-spacing:.3px;
+      background:linear-gradient(135deg, var(--primary), color-mix(in oklab, var(--primary) 60%, #4b2aff 40%));
+      color:white; box-shadow: 0 8px 24px rgba(124,77,255,.35), inset 0 1px 0 rgba(255,255,255,.25);
+      transition: transform var(--speed) ease, box-shadow var(--speed) ease, background var(--speed) ease, opacity var(--speed) ease;
+    }
+    .btn:hover{ transform: translateY(-2px); box-shadow:0 12px 30px rgba(124,77,255,.5), inset 0 1px 0 rgba(255,255,255,.35)}
+    .btn:active{ transform: translateY(0)}
+    .btn.alt{ background:linear-gradient(135deg, var(--accent), #66fff8); color:#0b0b12; box-shadow:0 8px 22px rgba(0,229,255,.35)}
+    .chip{display:inline-flex; gap:8px; align-items:center; padding:8px 12px; border-radius:999px; background:var(--glass); box-shadow:inset 0 1px 0 rgba(255,255,255,.05); color:var(--muted); font-weight:600; font-size:.9rem}
+
+    a{color:inherit; text-decoration:none}
+    .link{color:var(--accent)}
+
+    /* --- Header --- */
+    header{
+      position:sticky; top:0; z-index:40; backdrop-filter:saturate(140%) blur(10px); background:linear-gradient(180deg, rgba(10,10,20,.85), rgba(10,10,20,.4)); border-bottom:1px solid rgba(255,255,255,.06)
+    }
+    .nav{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
+    .brand{display:flex; align-items:center; gap:14px}
+    .logo{
+      width:44px; height:44px; border-radius:12px; display:grid; place-items:center; color:white; font-weight:900; letter-spacing:.5px;
+      background: conic-gradient(from 210deg at 50% 50%, var(--primary), #4b2aff, #00e5ff, var(--primary)); box-shadow: var(--shadow)
+    }
+    .brand h1{font-size:1.15rem; margin:0; font-weight:900}
+    .brand small{display:block; color:var(--muted); font-weight:600; letter-spacing:.4px}
+
+    nav ul{list-style:none; display:flex; gap:22px; align-items:center; margin:0; padding:0}
+    nav a{color:var(--muted); font-weight:700}
+    nav a:hover{color:var(--txt)}
+    .menu-btn{display:none; background:transparent; border:0; color:var(--txt)}
+
+    /* --- Hero --- */
+    .hero{position:relative; overflow:hidden}
+    .hero .container{display:grid; grid-template-columns: 1.2fr .8fr; gap:36px; padding:72px 0}
+    .eyebrow{font-weight:800; text-transform:uppercase; color:color-mix(in oklab, var(--muted) 80%, white 20%); letter-spacing:.18em}
+    .title{font-size:clamp(2rem, 3.6vw, 3.4rem); line-height:1.05; margin:10px 0 16px; font-weight:900}
+    .subtitle{color:var(--muted); font-size:clamp(1rem, 1.4vw, 1.15rem); max-width:60ch}
+
+    .hero-cta{display:flex; gap:14px; margin-top:22px; flex-wrap:wrap}
+
+    .stats{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:24px}
+    .stat{padding:14px; border-radius:14px; background:var(--glass); box-shadow:var(--shadow); text-align:center}
+    .stat b{font-size:1.15rem}
+
+    .hero-art{
+      position:relative; border-radius:var(--radius); background:
+        radial-gradient(400px 200px at 80% 20%, rgba(124,77,255,.18), transparent),
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      box-shadow: var(--shadow); min-height:360px; isolation:isolate; overflow:hidden;
+    }
+    .glow-ring{position:absolute; inset:auto -10% -10% -10%; height:160px; background:radial-gradient(60% 180% at 50% 0%, rgba(0,229,255,.35), transparent)}
+    .track{position:absolute; inset:0; background:
+      radial-gradient(200px 80px at 50% 20%, rgba(255,255,255,.06), transparent 60%),
+      linear-gradient(transparent 60%, rgba(0,0,0,.35) 90%),
+      repeating-linear-gradient(90deg, rgba(255,255,255,.06) 0 2px, transparent 2px 16px);
+      mask: linear-gradient(180deg, black 0%, black 80%, transparent); opacity:.9
+    }
+    .rc-chip{position:absolute; top:16px; left:16px}
+    .hero-badges{position:absolute; bottom:14px; left:14px; display:flex; gap:8px; flex-wrap:wrap}
+
+    /* --- Trust row --- */
+    .trust{
+      border-top:1px solid rgba(255,255,255,.06); border-bottom:1px solid rgba(255,255,255,.06);
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+    }
+    .trust .container{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; padding:18px 0}
+    .trust .item{display:flex; gap:12px; align-items:center; padding:12px 14px; border-radius:12px; background:var(--glass)}
+
+    /* --- Sections --- */
+    section{padding:56px 0}
+    .sec-head{display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:18px}
+    .sec-head h2{margin:0; font-size:clamp(1.4rem, 2.4vw, 2rem)}
+    .muted{color:var(--muted)}
+
+    /* --- Categories --- */
+    .grid{display:grid; grid-template-columns: repeat(12, 1fr); gap:16px}
+    .card{grid-column: span 3; background:linear-gradient(180deg, var(--glass-strong), rgba(255,255,255,.04)); border:1px solid rgba(255,255,255,.06); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden; transition:transform var(--speed), box-shadow var(--speed)}
+    .card:hover{ transform: translateY(-4px); box-shadow:0 18px 42px rgba(0,0,0,.45)}
+    .thumb{aspect-ratio: 16/10; background: radial-gradient(180px 120px at 60% 40%, rgba(124,77,255,.25), transparent), linear-gradient(135deg, #1a1a2b, #0e0e18); display:grid; place-items:center}
+    .thumb svg{width:52%; height:auto; opacity:.95}
+    .card .body{padding:16px}
+    .card h3{margin:0 0 6px}
+
+    /* --- Products --- */
+    .products .card{grid-column: span 4}
+    .price{font-weight:900}
+    .tag{font-size:.8rem; padding:4px 8px; border-radius:999px; background:rgba(124,77,255,.18); color:#cbb7ff; border:1px solid rgba(124,77,255,.35)}
+
+    /* --- Newsletter --- */
+    .newsletter{display:grid; grid-template-columns:1.2fr .8fr; gap:20px; background:linear-gradient(135deg, rgba(124,77,255,.25), rgba(0,229,255,.12)); border:1px solid rgba(255,255,255,.06); border-radius:var(--radius); padding:20px; box-shadow:var(--shadow)}
+    .nl-form{display:flex; gap:10px; flex-wrap:wrap}
+    .input{
+      flex:1 1 260px; padding:14px 16px; border-radius:999px; background:rgba(0,0,0,.35); color:var(--txt); border:1px solid rgba(255,255,255,.08); outline:none;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+    }
+    .input:focus{ box-shadow: var(--ring), inset 0 1px 0 rgba(255,255,255,.08) }
+
+    /* --- Footer --- */
+    footer{padding:40px 0 56px; color:var(--muted)}
+    .f-grid{display:grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap:22px}
+    .f-title{color:var(--txt); font-weight:800; margin-bottom:10px}
+    .fine{margin-top:14px; font-size:.9rem}
+
+    /* --- Responsive --- */
+    @media (max-width: 960px){
+      .hero .container{grid-template-columns:1fr}
+      .newsletter{grid-template-columns:1fr}
+      .f-grid{grid-template-columns: 1fr 1fr}
+    }
+    @media (max-width: 720px){
+      nav ul{display:none}
+      .menu-btn{display:block}
+      .trust .container{grid-template-columns:1fr 1fr}
+      .card{grid-column: span 6}
+      .products .card{grid-column: span 6}
+      .grid{grid-template-columns: repeat(6, 1fr)}
+    }
+    @media (max-width: 460px){
+      .card,.products .card{grid-column: span 6}
+      .f-grid{grid-template-columns: 1fr}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">RC</div>
+        <div>
+          <h1>The RC Reserve</h1>
+          <small>thercreserve.com</small>
+        </div>
+      </div>
+      <button class="menu-btn" aria-label="Open Menu" onclick="toggleMenu()">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <nav>
+        <ul id="nav-list">
+          <li><a href="#shop">Shop</a></li>
+          <li><a href="#categories">Categories</a></li>
+          <li><a href="#new">New Arrivals</a></li>
+          <li><a href="#newsletter">Updates</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container">
+        <div>
+          <div class="chip eyebrow">Welcome to The RC Reserve</div>
+          <h2 class="title">Your pit lane for RC cars, trucks, drones & boats.</h2>
+          <p class="subtitle">Kits and RTRs, hop‑ups and tools, batteries and chargers — curated by enthusiasts, shipped fast, and tuned for performance.</p>
+          <div class="hero-cta">
+            <a class="btn" href="#shop">Shop Now</a>
+            <a class="btn alt" href="#categories">Explore Categories</a>
+          </div>
+          <div class="stats">
+            <div class="stat"><b>2k+</b><div class="muted">Parts & Upgrades</div></div>
+            <div class="stat"><b>72hr</b><div class="muted">Build Support</div></div>
+            <div class="stat"><b>4.9★</b><div class="muted">Customer Rating</div></div>
+          </div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <span class="rc-chip chip">Performance • Precision • Play</span>
+          <div class="hero-badges">
+            <span class="chip">RTR • Kit • Pro</span>
+            <span class="chip">1/10 • 1/8 • Mini</span>
+            <span class="chip">LiPo • NiMH</span>
+          </div>
+          <div class="track"></div>
+          <div class="glow-ring"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRUST / VALUE PROP ROW -->
+    <div class="trust">
+      <div class="container">
+        <div class="item">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 12h18M3 12l5-5M3 12l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <b>Fast shipping</b>
+          <span class="muted">Free over $99</span>
+        </div>
+        <div class="item">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 3l7 4v6c0 4.418-3.582 8-8 8s-8-3.582-8-8V7l9-4z" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+          <b>Secure checkout</b>
+          <span class="muted">PCI compliant</span>
+        </div>
+        <div class="item">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <b>Expert support</b>
+          <span class="muted">Mon–Sat 9–6 ET</span>
+        </div>
+        <div class="item">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 4h16v12H7l-3 3V4z" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+          <b>Guides & tips</b>
+          <span class="muted">Build smarter</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CATEGORIES -->
+    <section id="categories" class="container">
+      <div class="sec-head">
+        <h2>Shop by Category</h2>
+        <a class="link" href="#shop">See all</a>
+      </div>
+      <div class="grid">
+        <!-- Cars -->
+        <article class="card" tabindex="0">
+          <div class="thumb">
+            <svg viewBox="0 0 100 48" xmlns="http://www.w3.org/2000/svg"><path d="M9 33h82l-4-9-22-6-16 4-22-3-18 5z" fill="#9da0ff"/><circle cx="28" cy="37" r="6" fill="#c5c7ff"/><circle cx="72" cy="37" r="6" fill="#c5c7ff"/></svg>
+          </div>
+          <div class="body">
+            <h3>RC Cars</h3>
+            <p class="muted">1/10 & 1/8, drift, rally, on‑road.</p>
+          </div>
+        </article>
+        <!-- Trucks -->
+        <article class="card" tabindex="0">
+          <div class="thumb">
+            <svg viewBox="0 0 100 48" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="20" width="60" height="14" rx="4" fill="#9df"/><rect x="68" y="24" width="24" height="10" rx="3" fill="#b8ecff"/><circle cx="26" cy="37" r="6" fill="#c5f6ff"/><circle cx="64" cy="37" r="6" fill="#c5f6ff"/></svg>
+          </div>
+          <div class="body">
+            <h3>RC Trucks</h3>
+            <p class="muted">Crawlers, short‑course, monster.</p>
+          </div>
+        </article>
+        <!-- Drones -->
+        <article class="card" tabindex="0">
+          <div class="thumb">
+            <svg viewBox="0 0 100 48" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="24" r="6" fill="#b6a7ff"/><circle cx="20" cy="10" r="5" fill="#9da0ff"/><circle cx="80" cy="10" r="5" fill="#9da0ff"/><circle cx="20" cy="38" r="5" fill="#9da0ff"/><circle cx="80" cy="38" r="5" fill="#9da0ff"/></svg>
+          </div>
+          <div class="body">
+            <h3>Drones & FPV</h3>
+            <p class="muted">Ready‑to‑fly, frames, VTX, goggles.</p>
+          </div>
+        </article>
+        <!-- Boats -->
+        <article class="card" tabindex="0">
+          <div class="thumb">
+            <svg viewBox="0 0 100 48" xmlns="http://www.w3.org/2000/svg"><path d="M12 28c8 8 22 12 38 12s30-4 38-12l-10 1-22 3-22-4-14-2z" fill="#a8e8ff"/></svg>
+          </div>
+          <div class="body">
+            <h3>RC Boats</h3>
+            <p class="muted">Brushless speed & scale classics.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- FEATURED / NEW ARRIVALS -->
+    <section id="new" class="container products">
+      <div class="sec-head">
+        <h2>New Arrivals</h2>
+        <span class="muted">Fresh kits & must‑have hop‑ups</span>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <div class="thumb"></div>
+          <div class="body">
+            <div class="tag">1/10 RTR</div>
+            <h3>Road‑Ripper GT V2</h3>
+            <p class="muted">50+ mph out of the box. Tuned ESC and aluminum hubs.</p>
+            <div class="row" style="justify-content:space-between; margin-top:6px">
+              <span class="price">$349</span>
+              <a class="btn" href="#">Add to Cart</a>
+            </div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="thumb"></div>
+          <div class="body">
+            <div class="tag">Upgrade</div>
+            <h3>Brushless Combo 3650 • 4000KV</h3>
+            <p class="muted">Sensorless power with program card included.</p>
+            <div class="row" style="justify-content:space-between; margin-top:6px">
+              <span class="price">$89</span>
+              <a class="btn" href="#">Add to Cart</a>
+            </div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="thumb"></div>
+          <div class="body">
+            <div class="tag">Tools</div>
+            <h3>Pro Hex Driver Set (Ti‑Nitride)</h3>
+            <p class="muted">2.0 • 2.5 • 3.0 mm — knurled grip, magnetic tips.</p>
+            <div class="row" style="justify-content:space-between; margin-top:6px">
+              <span class="price">$39</span>
+              <a class="btn" href="#">Add to Cart</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <section id="newsletter" class="container">
+      <div class="newsletter">
+        <div>
+          <div class="eyebrow">Stay in the loop</div>
+          <h2 style="margin:6px 0 10px">Drops, builds, and pro tips — straight to inbox.</h2>
+          <p class="muted">Sign up for early access to new releases, giveaway alerts, and track‑side setup notes from our team drivers.</p>
+        </div>
+        <form class="nl-form" onsubmit="event.preventDefault(); toast('Thanks — check your email to confirm!')">
+          <input class="input" type="email" placeholder="you@thercreserve.com" aria-label="Email address" required>
+          <button class="btn alt" type="submit">Subscribe</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- CONTACT / CTA -->
+    <section id="contact" class="container">
+      <div class="sec-head">
+        <h2>Questions? Need a build plan?</h2>
+        <span class="muted">We’re real RC nerds — and friendly.</span>
+      </div>
+      <div class="grid">
+        <div class="card" style="grid-column:span 6; padding:16px">
+          <div class="body">
+            <h3>Email</h3>
+            <p class="muted">hello@thercreserve.com</p>
+            <a class="btn" href="mailto:hello@thercreserve.com">Send a note</a>
+          </div>
+        </div>
+        <div class="card" style="grid-column:span 6; padding:16px">
+          <div class="body">
+            <h3>Community</h3>
+            <p class="muted">Build logs, tune sheets, race meetups.</p>
+            <a class="btn" href="#">Join the crew</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container f-grid">
+      <div>
+        <div class="brand" style="margin-bottom:8px">
+          <div class="logo" aria-hidden="true">RC</div>
+          <div>
+            <div class="f-title">The RC Reserve</div>
+            <small class="muted">thercreserve.com</small>
+          </div>
+        </div>
+        <p class="muted">Curated gear for hobbyists, racers, and first‑timers. Built by people who actually drive, fly, and float these things.</p>
+        <div class="fine">© <span id="yr"></span> The RC Reserve. All rights reserved.</div>
+      </div>
+      <div>
+        <div class="f-title">Shop</div>
+        <a class="muted" href="#shop">All Products</a><br>
+        <a class="muted" href="#categories">Categories</a><br>
+        <a class="muted" href="#new">New Arrivals</a>
+      </div>
+      <div>
+        <div class="f-title">Support</div>
+        <a class="muted" href="#">Order Status</a><br>
+        <a class="muted" href="#">Warranty</a><br>
+        <a class="muted" href="#">Returns</a>
+      </div>
+      <div>
+        <div class="f-title">Company</div>
+        <a class="muted" href="#">About</a><br>
+        <a class="muted" href="#contact">Contact</a><br>
+        <a class="muted" href="#newsletter">Newsletter</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const yr = document.getElementById('yr'); if(yr) yr.textContent = new Date().getFullYear();
+    function toggleMenu(){
+      const list = document.getElementById('nav-list');
+      const isOpen = getComputedStyle(list).display !== 'none';
+      list.style.display = isOpen ? 'none' : 'flex';
+      list.style.flexDirection = 'column'; list.style.gap = '12px'; list.style.background = 'rgba(10,10,20,.92)'; list.style.position = 'absolute'; list.style.top = '60px'; list.style.right = '4%'; list.style.padding = '14px 18px'; list.style.border = '1px solid rgba(255,255,255,.08)'; list.style.borderRadius = '14px';
+    }
+    function toast(msg){
+      const t = document.createElement('div');
+      t.textContent = msg; t.style.position='fixed'; t.style.left='50%'; t.style.bottom='24px'; t.style.transform='translateX(-50%)'; t.style.background='linear-gradient(135deg, var(--accent), #66fff8)'; t.style.color='#0b0b12'; t.style.fontWeight='800'; t.style.padding='12px 16px'; t.style.borderRadius='999px'; t.style.boxShadow='0 8px 24px rgba(0,229,255,.35)'; t.style.zIndex='60';
+      document.body.appendChild(t); setTimeout(()=>{t.style.opacity='.0'; t.style.transition='opacity .4s'; setTimeout(()=>t.remove(), 400)}, 1800)
+    }
+  </script>
+</body>
+</html>
