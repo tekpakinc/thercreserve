@@ -1,133 +1,106 @@
-import {
-  changeEmail,
-  logInEmail,
-  logInGoogle,
-  logOut,
-  signUpEmail,
-  subscribeAuth,
-  triggerPasswordReset,
-  triggerVerification
-} from './services/auth.js';
-import { sanitizeInput } from './utils/sanitize.js';
-import { createRateLimiter } from './utils/rateLimiter.js';
-import { renderAbout } from './pages/about.js';
-import { renderHome } from './pages/home.js';
-import { renderSettings } from './pages/settings.js';
-
 const app = document.querySelector('#app');
 
-const products = [
-  { id: 1, name: 'RC Drift Chassis', price: 329.99 },
-  { id: 2, name: 'Brushless Motor Pack', price: 119.5 },
-  { id: 3, name: '4S LiPo Battery', price: 59.0 }
-];
+app.innerHTML = `
+  <div class="site-shell">
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="brand" href="/" aria-label="The RC Reserve home">
+          <span class="brand-mark" aria-hidden="true">RC</span>
+          <span class="brand-copy">
+            <strong>The RC Reserve</strong>
+            <small>Parts. Builds. Culture.</small>
+          </span>
+        </a>
+        <a class="header-link" href="mailto:info@tekpakinc.net?subject=The%20RC%20Reserve%20Inquiry">Contact</a>
+      </div>
+    </header>
 
-const authLimiter = createRateLimiter({ windowMs: 60_000, limit: 7 });
-let state = { user: null, guestMode: false, route: 'home', notice: '' };
+    <main>
+      <section class="hero">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow"><span></span> New site in the works</p>
+            <h1>Built for people who take play seriously.</h1>
+            <p class="lead">The RC Reserve is becoming a dedicated destination for remote-control vehicles, performance parts, upgrades, project builds, and the people who keep the hobby moving.</p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#notify">Get Launch Updates</a>
+              <a class="button button-secondary" href="#preview">See What’s Coming</a>
+            </div>
+            <div class="status-line"><span class="status-dot"></span><strong>Current status:</strong> workshop doors closed while we finish the new site.</div>
+          </div>
 
-function nav() {
-  return `<header>
-    <h1>The RC Reserve</h1>
-    <nav>
-      <button data-route="home">Shop</button>
-      <button data-route="about">About</button>
-      <button data-route="settings">Settings</button>
-      ${state.user ? '<button data-action="logout">Logout</button>' : '<button data-action="open-auth">Login / Sign Up</button>'}
-    </nav>
-  </header>`;
-}
+          <div class="hero-panel" aria-label="RC Reserve construction status">
+            <div class="panel-top">
+              <span>THE RC RESERVE</span>
+              <span>BUILD 01</span>
+            </div>
+            <div class="track-lines" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+            <div class="panel-center">
+              <span class="panel-label">SITE DEVELOPMENT</span>
+              <strong>UNDER<br />CONSTRUCTION</strong>
+              <span class="panel-sub">Tuning the details before launch.</span>
+            </div>
+            <div class="panel-footer"><span>SHOP</span><span>BUILDS</span><span>COMMUNITY</span></div>
+          </div>
+        </div>
+      </section>
 
-function authOverlay() {
-  if (state.user || state.guestMode) return '';
-  return `<section class="overlay"><div class="card">
-      <button class="close" data-action="guest">✕</button>
-      <h2>Welcome Back</h2>
-      <p>Sign in with Google, email/password, or create an account.</p>
-      <button data-action="google">Continue with Google</button>
-      <form id="login-form"><h3>Email Login</h3>
-        <input name="email" type="email" placeholder="Email" required />
-        <input name="password" type="password" placeholder="Password" required minlength="8" />
-        <button type="submit">Log In</button>
-      </form>
-      <form id="signup-form"><h3>Create Account</h3>
-        <input name="name" placeholder="Display Name" required maxlength="60" />
-        <input name="email" type="email" placeholder="Email" required />
-        <input name="password" type="password" placeholder="Password" required minlength="8" />
-        <button type="submit">Sign Up + Verify Email</button>
-      </form>
-    </div></section>`;
-}
+      <section class="preview-section" id="preview">
+        <div class="container">
+          <div class="section-heading">
+            <p class="section-kicker">Coming to the reserve</p>
+            <h2>More than another parts catalog.</h2>
+            <p>We are building a practical RC hub around products, projects, and enthusiast culture.</p>
+          </div>
+          <div class="feature-grid">
+            <article class="feature-card"><span class="feature-number">01</span><h3>Vehicles & Parts</h3><p>RC cars, trucks, electronics, batteries, motors, driveline components, and replacement parts.</p></article>
+            <article class="feature-card"><span class="feature-number">02</span><h3>Performance Upgrades</h3><p>Curated upgrades for speed, durability, handling, crawling, drifting, and custom builds.</p></article>
+            <article class="feature-card"><span class="feature-number">03</span><h3>Build Features</h3><p>Project spotlights, setup ideas, product notes, and practical inspiration from the workbench.</p></article>
+            <article class="feature-card"><span class="feature-number">04</span><h3>Hobby Community</h3><p>A place for enthusiasts, new builders, racers, bashers, crawlers, and collectors to connect.</p></article>
+          </div>
+        </div>
+      </section>
 
-const pageBody = () => (state.route === 'about' ? renderAbout() : state.route === 'settings' ? renderSettings(state.user) : renderHome(products));
+      <section class="notify-section" id="notify">
+        <div class="container notify-grid">
+          <div>
+            <p class="section-kicker">Stay in the loop</p>
+            <h2>Be first through the gate.</h2>
+            <p>Join the launch list for opening updates, featured builds, new inventory, and RC Reserve announcements.</p>
+          </div>
+          <form class="notify-form" action="https://formsubmit.co/info@tekpakinc.net" method="POST">
+            <input type="hidden" name="_subject" value="The RC Reserve Launch List Signup" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="text" name="_honey" class="hidden-field" tabindex="-1" autocomplete="off" />
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" maxlength="80" placeholder="Your name" required />
+            <label for="email">Email address</label>
+            <input id="email" name="email" type="email" maxlength="120" placeholder="you@example.com" required />
+            <label for="interest">What are you into?</label>
+            <select id="interest" name="interest">
+              <option value="General RC">General RC</option>
+              <option value="Bashing">Bashing</option>
+              <option value="Racing">Racing</option>
+              <option value="Crawling">Crawling</option>
+              <option value="Drifting">Drifting</option>
+              <option value="Collecting">Collecting</option>
+              <option value="Building and Upgrades">Building &amp; Upgrades</option>
+            </select>
+            <button class="button button-primary" type="submit">Join the Launch List</button>
+            <small>Only RC Reserve updates. No inbox demolition derby.</small>
+          </form>
+        </div>
+      </section>
+    </main>
 
-function render() {
-  app.innerHTML = `${nav()}${state.notice ? `<p class="notice">${sanitizeInput(state.notice)}</p>` : ''}${pageBody()}${authOverlay()}`;
-}
+    <footer>
+      <div class="container footer-row">
+        <div><strong>The RC Reserve</strong><span>A TEK-PAK Inc. project</span></div>
+        <p>Parts. Builds. Culture.</p>
+        <p>&copy; <span id="year"></span> The RC Reserve</p>
+      </div>
+    </footer>
+  </div>
+`;
 
-const setNotice = (msg) => {
-  state.notice = msg;
-  render();
-};
-
-async function guarded(action, fn) {
-  const check = authLimiter.hit(`auth:${action}`);
-  if (!check.allowed) return setNotice(`Too many attempts. Retry in ${Math.ceil(check.retryAfterMs / 1000)}s.`);
-  try { await fn(); } catch (error) { setNotice(error?.message ?? 'Request failed.'); }
-}
-
-app.addEventListener('click', (event) => {
-  const target = event.target;
-  if (!(target instanceof HTMLElement)) return;
-  if (target.dataset.route) {
-    state.route = target.dataset.route;
-    return render();
-  }
-
-  const action = target.dataset.action;
-  if (!action) return;
-  if (action === 'open-auth') { state.guestMode = false; return render(); }
-  if (action === 'guest') { state.guestMode = true; return setNotice('Browsing as guest. Sign in to buy.'); }
-  if (action === 'google') return guarded('google', async () => { await logInGoogle(); setNotice('Signed in with Google.'); });
-  if (action === 'logout') return guarded('logout', async () => { await logOut(); state.guestMode = false; setNotice('Logged out.'); });
-  if (action === 'verify') {
-    if (!state.user) return setNotice('Please login first.');
-    return guarded('verify', async () => { await triggerVerification(state.user); setNotice('Verification email sent.'); });
-  }
-  if (action === 'buy') {
-    if (!state.user) { state.guestMode = false; render(); return setNotice('Please log in or sign up before buying.'); }
-    if (!state.user.emailVerified) return setNotice('Verify your email before checkout.');
-    return setNotice('Prototype checkout success.');
-  }
-});
-
-app.addEventListener('submit', (event) => {
-  const form = event.target;
-  if (!(form instanceof HTMLFormElement)) return;
-  event.preventDefault();
-
-  if (form.id === 'login-form') {
-    const email = sanitizeInput(form.email.value);
-    return guarded('login', async () => { await logInEmail(email, form.password.value); setNotice('Logged in.'); });
-  }
-  if (form.id === 'signup-form') {
-    const name = sanitizeInput(form.name.value);
-    const email = sanitizeInput(form.email.value);
-    return guarded('signup', async () => { await signUpEmail(name, email, form.password.value); setNotice('Account created. Check your email for verification link.'); });
-  }
-  if (form.id === 'reset-form') {
-    const email = sanitizeInput(form.email.value);
-    return guarded('reset', async () => { await triggerPasswordReset(email); setNotice('Reset email sent.'); });
-  }
-  if (form.id === 'change-email-form') {
-    if (!state.user) return setNotice('Login required to change email.');
-    const email = sanitizeInput(form.email.value);
-    return guarded('change-email', async () => { await changeEmail(state.user, email); setNotice('Email changed. Verify your new email.'); });
-  }
-});
-
-subscribeAuth((user) => {
-  state.user = user;
-  render();
-});
-
-render();
+document.querySelector('#year').textContent = new Date().getFullYear();
