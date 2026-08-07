@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "updated": "2026-08-07",
+  "vehicles": [
+    { "id": "traxxas-trx4-sport", "brand": "Traxxas", "model": "TRX-4 Sport", "platform": "TRX-4", "scale": "1/10", "category": "Trail crawler", "drive": "4WD", "power": "Electric", "officialUrl": "https://traxxas.com/products/landing/trx-4-sport/" },
+    { "id": "traxxas-slash-4x4-vxl", "brand": "Traxxas", "model": "Slash 4X4 VXL", "platform": "Slash 4X4", "scale": "1/10", "category": "Short course", "drive": "4WD", "power": "Electric", "officialUrl": "https://traxxas.com/products/models/electric/slash-4x4-vxl" },
+    { "id": "traxxas-maxx", "brand": "Traxxas", "model": "Maxx", "platform": "Maxx", "scale": "1/10", "category": "Monster truck", "drive": "4WD", "power": "Electric", "officialUrl": "https://traxxas.com/products/landing/maxx/" },
+    { "id": "arrma-kraton-6s-blx", "brand": "ARRMA", "model": "Kraton 6S BLX", "platform": "6S BLX", "scale": "1/8", "category": "Monster truck", "drive": "4WD", "power": "Electric", "officialUrl": "https://www.arrma-rc.com/en/product/1-8-kraton-6s-v6-blx-4x4-exb-speed-monster-truck-rtr/ARA8708T1.html" },
+    { "id": "arrma-senton-3s-blx", "brand": "ARRMA", "model": "Senton 3S BLX", "platform": "3S BLX", "scale": "1/10", "category": "Short course", "drive": "4WD", "power": "Electric", "officialUrl": "https://www.arrma-rc.com/en/product/1-10-senton-223s-blx-4x4-short-course-truck-rtr/ARA4303V4.html" },
+    { "id": "axial-scx10-iii-base-camp", "brand": "Axial", "model": "SCX10 III Base Camp", "platform": "SCX10 III", "scale": "1/10", "category": "Trail crawler", "drive": "4WD", "power": "Electric", "officialUrl": "https://www.axialadventure.com/product/1-10-scx10-iii-base-camp-4wd-rock-crawler-brushed-rtr/AXI03027.html" },
+    { "id": "axial-capra-1-9", "brand": "Axial", "model": "Capra 1.9 Unlimited Trail Buggy", "platform": "Capra", "scale": "1/10", "category": "Rock crawler", "drive": "4WD", "power": "Electric", "officialUrl": "https://www.axialadventure.com/product/axial-1-10-capra-unlimited-1.9-4x4-trail-buggy-brushed-rtr/AXI03000.html" },
+    { "id": "losi-tenacity-db-pro", "brand": "Losi", "model": "TENACITY DB Pro", "platform": "TENACITY", "scale": "1/10", "category": "Desert buggy", "drive": "4WD", "power": "Electric", "officialUrl": "https://www.losi.com/product/losi-1-10-tenacity-db-pro-4wd-desert-buggy-brushless-rtr-with-smart-fox-racing/LOS03027T2.html" },
+    { "id": "team-associated-rb10", "brand": "Team Associated", "model": "RB10", "platform": "RB10", "scale": "1/10", "category": "Race buggy", "drive": "2WD", "power": "Electric", "officialUrl": "https://www.associatedelectrics.com/teamassociated/cars_and_trucks/RB10/RTR/" },
+    { "id": "tamiya-tt02", "brand": "Tamiya", "model": "TT-02", "platform": "TT-02", "scale": "1/10", "category": "Touring car", "drive": "4WD", "power": "Electric", "officialUrl": "https://www.tamiyausa.com/shop/110-4wd-shaft-drive-road-tt/" },
+    { "id": "redcat-ascent-18", "brand": "Redcat", "model": "Ascent-18", "platform": "Ascent-18", "scale": "1/18", "category": "Trail crawler", "drive": "4WD", "power": "Electric", "officialUrl": "https://www.redcatracing.com/products/redcat-ascent-18-crawler-1-18-rock-crawler" },
+    { "id": "kyosho-mp10e-readyset", "brand": "Kyosho", "model": "Inferno MP10e Readyset", "platform": "Inferno MP10", "scale": "1/8", "category": "Race buggy", "drive": "4WD", "power": "Electric", "officialUrl": "https://kyoshoamerica.com/rccar/inferno/1-8-scale-radio-controlled-brushless-powered-4wd-racing-buggy-readyset-inferno-mp10e-color-type-1-green-34113t1.html" }
+  ]
+}
