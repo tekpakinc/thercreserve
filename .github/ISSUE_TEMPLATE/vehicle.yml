@@ -1,0 +1,54 @@
+name: Submit a vehicle
+description: Suggest a vehicle for the free RC Reserve reference library.
+title: "[Vehicle]: "
+labels: ["library", "needs-review"]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for helping grow the free RC vehicle library. Please use official manufacturer information whenever possible.
+  - type: input
+    id: brand
+    attributes:
+      label: Brand
+      placeholder: Traxxas
+    validations:
+      required: true
+  - type: input
+    id: model
+    attributes:
+      label: Exact model and variant
+      placeholder: TRX-4 Sport High Trail Edition
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options: [Trail crawler, Rock crawler, Monster truck, Short course, Race buggy, Desert buggy, Touring car, Drift car, Other]
+    validations:
+      required: true
+  - type: input
+    id: scale
+    attributes:
+      label: Scale
+      placeholder: 1/10
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Official product or manual URL
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional details
+      description: Include platform, drive type, power type, SKU, generation, or regional naming differences if known.
+  - type: checkboxes
+    id: accuracy
+    attributes:
+      label: Accuracy check
+      options:
+        - label: I checked that this information matches the linked source.
+          required: true

@@ -1,0 +1,31 @@
+name: Correct library information
+description: Report inaccurate, outdated, or incomplete vehicle data.
+title: "[Correction]: "
+labels: ["library", "correction", "needs-review"]
+body:
+  - type: input
+    id: vehicle
+    attributes:
+      label: Vehicle or record
+      placeholder: arrma-kraton-6s-blx
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is incorrect?
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: Proposed correction
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Supporting source
+      description: Prefer an official manufacturer page, manual, or parts diagram.
+    validations:
+      required: true

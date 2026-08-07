@@ -1,0 +1,27 @@
+name: Request a free RC tool
+description: Suggest a calculator, checklist, or reference that would help the hobby community.
+title: "[Tool idea]: "
+labels: ["tool-idea"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What RC problem should this solve?
+      description: Tell us what you are trying to figure out at the bench, track, trail, or flying field.
+    validations:
+      required: true
+  - type: textarea
+    id: current-method
+    attributes:
+      label: How do you solve it today?
+  - type: textarea
+    id: inputs
+    attributes:
+      label: What information would the tool need?
+  - type: dropdown
+    id: segment
+    attributes:
+      label: RC segment
+      options: [Cars and trucks, Crawlers, Racing, Drift, Boats, Aircraft, Drones, Construction equipment, General RC]
+    validations:
+      required: true
