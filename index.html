@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="description" content="Free RC calculators, troubleshooting help, and vehicle references for hobbyists. Built by Tek-Pak Inc." />
     <meta name="theme-color" content="#111318" />
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self'; img-src 'self' data: https:; base-uri 'self'; object-src 'none';" />
@@ -12,8 +12,15 @@
     <meta property="og:url" content="https://thercreserve.com/" />
     <meta property="og:image" content="https://thercreserve.com/assets/og.png" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="RC Reserve" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png" />
     <title>The RC Reserve | Free RC Tools by Tek-Pak Inc.</title>
     <link rel="stylesheet" href="/src/styles/main.css" />
   </head>
-  <body><div id="app"></div><script type="module" src="/src/main.js"></script></body>
+  <body><div id="app"></div><script type="module" src="/src/main.js"></script><script src="/pwa.js" defer></script></body>
 </html>

@@ -24,7 +24,7 @@ app.innerHTML = `
     <div class="container nav-wrap">
       <a class="brand" href="#top" aria-label="The RC Reserve home"><span class="brand-mark">RC</span><span><strong>The RC Reserve</strong><small>Free RC tools</small></span></a>
       <nav aria-label="Main navigation"><a href="#tools">Tools</a><a href="#troubleshoot">Fix my RC</a><a href="#library">Vehicle library</a></nav>
-      <a class="maker-link" href="https://tekpakinc.net" target="_blank" rel="noreferrer">By Tek-Pak Inc. ↗</a>
+      <div class="header-actions"><button class="install-header" data-pwa-install-trigger><span>↓</span> Install app</button><a class="maker-link" href="https://tekpakinc.net" target="_blank" rel="noreferrer">By Tek-Pak Inc. ↗</a></div>
     </div>
   </header>
 
@@ -97,6 +97,7 @@ app.innerHTML = `
   </main>
 
   <footer><div class="container footer-grid"><a class="brand" href="#top"><span class="brand-mark">RC</span><span><strong>The RC Reserve</strong><small>Free RC tools</small></span></a><p>Free to use. Built for the hobby.</p><span>© <b id="year"></b> Tek-Pak Inc.</span></div></footer>
+  <nav class="mobile-tab-bar" aria-label="Mobile navigation"><a href="#top"><span>⌂</span><small>Home</small></a><a href="#tools"><span>⌁</span><small>Tools</small></a><a href="#troubleshoot"><span>✓</span><small>Fix</small></a><a href="#library"><span>▦</span><small>Library</small></a><button data-pwa-install-trigger><span>↓</span><small>Install</small></button></nav>
 `;
 
 document.querySelector('#year').textContent = new Date().getFullYear();
